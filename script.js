@@ -3,6 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const conditionElement = document.getElementById('condition');
     const timeElement = document.getElementById('time');
     const dateElement = document.getElementById('date');
+    const weatherIconElement = document.getElementById('weather-icon');
+
+    const weatherIcons = {
+        "Sunny": "sunny",
+        "Clear": "clear",
+        "Partly cloudy": "partly-cloudy",
+        "Cloudy": "cloudy",
+        "Overcast": "overcast",
+        // Add other conditions as needed
+    };
 
     const updateWeather = () => {
         fetch(`https://api.weatherapi.com/v1/current.json?key=9d0b2624acea434ea1b204016242207&q=New York`)
@@ -13,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 temperatureElement.textContent = `${temp}°F`;
                 conditionElement.textContent = condition;
+
+                const iconClass = weatherIcons[condition] || "default";
+                weatherIconElement.className = `weather-icon ${iconClass}`;
             })
             .catch(error => console.error('Error fetching weather data:', error));
     };
