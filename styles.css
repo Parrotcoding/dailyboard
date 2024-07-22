@@ -1,0 +1,45 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+}
+
+.weather-widget {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    text-align: center;
+    color: white;
+}
+
+.background-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.weather-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.temperature {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.condition, .time, .date {
+    font-size: 1.5rem;
+}
