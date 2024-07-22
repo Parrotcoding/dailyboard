@@ -7,6 +7,7 @@ body, html {
     justify-content: center;
     align-items: center;
     background: #ffffff;
+    font-family: Arial, sans-serif;
 }
 
 .weather-widget {
@@ -15,7 +16,7 @@ body, html {
     max-width: 800px;
     height: 450px;
     text-align: center;
-    color: white;
+    color: black; /* Change text color to black */
 }
 
 .background-image {
@@ -30,16 +31,32 @@ body, html {
 
 .weather-info {
     position: absolute;
-    top: 50%;
+    top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-text {
+    text-align: center;
 }
 
 .temperature {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
 }
 
-.condition, .time, .date {
+.condition {
+    font-size: 1.5rem;
+}
+
+.time-info {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.time, .date {
     font-size: 1.5rem;
 }
