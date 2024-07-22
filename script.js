@@ -6,18 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateElement = document.getElementById('date');
 
     const updateWeather = (latitude, longitude) => {
+        console.log(`Fetching weather for coordinates: ${latitude}, ${longitude}`);
         fetch(`https://api.weatherapi.com/v1/current.json?key=9d0b2624acea434ea1b204016242207&q=${latitude},${longitude}`)
             .then(response => response.json())
             .then(data => {
                 const temp = Math.round(data.current.temp_f);
                 const condition = data.current.condition.text;
-                const location = data.location.name + ', ' + data.location.region;
+                const location = `${data.location.name}, ${data.location.region}`;
+
+                console.log(`Weather data fetched: ${temp}°F, ${condition}, ${location}`);
 
                 temperatureElement.textContent = `${temp}°F`;
                 conditionElement.textContent = condition;
                 locationElement.textContent = location;
             })
-            .catch(error => console.error('Error fetching weather data:', error));
+            .catch(error => {
+                console.error('Error fetching weather data:', error);
+                locationElement.textContent = 'Error fetching location';
+            });
     };
 
     const updateTime = () => {
@@ -41,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
                 const { latitude, longitude } = position.coords;
+                console.log(`Device location: ${latitude}, ${longitude}`);
                 updateWeather(latitude, longitude);
             }, error => {
                 console.error('Error getting location:', error);
