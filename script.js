@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const temperatureElement = document.getElementById('temperature');
     const conditionElement = document.getElementById('condition');
+    const locationElement = document.getElementById('location');
     const timeElement = document.getElementById('time');
     const dateElement = document.getElementById('date');
 
@@ -10,9 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 const temp = Math.round(data.current.temp_f);
                 const condition = data.current.condition.text;
+                const location = data.location.name + ', ' + data.location.region;
 
                 temperatureElement.textContent = `${temp}°F`;
                 conditionElement.textContent = condition;
+                locationElement.textContent = location;
             })
             .catch(error => console.error('Error fetching weather data:', error));
     };
