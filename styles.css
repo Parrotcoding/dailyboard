@@ -41,6 +41,11 @@ body, html {
     align-items: center;
 }
 
+.location {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 .temperature {
     font-size: 2.5rem;
     font-weight: bold;
