@@ -73,8 +73,18 @@ body, html {
 }
 
 /* Weather Icons */
-.sunny { background-image: url('data:image/svg+xml;base64,...'); } /* Replace ... with your base64-encoded SVG */
-.clear { background-image: url('data:image/svg+xml;base64,...'); } /* Replace ... with your base64-encoded SVG */
-.partly-cloudy { background-image: url('data:image/svg+xml;base64,...'); } /* Replace ... with your base64-encoded SVG */
-.cloudy { background-image: url('data:image/svg+xml;base64,...'); } /* Replace ... with your base64-encoded SVG */
-.overcast { background-image: url('data:image/svg+xml;base64,...'); } /* Replace ... with your base64-encoded SVG */
+.sunny {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAADy7eXAAAAJdklEQVR42mNkYGAURRBgIDY1NbWprKys1NfXz9fW1gb+//+/u5ubm/v//39nZrGpkQbG9AdJ2kzIYAAAAASUVORK5CYII='); 
+}
+.clear {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAADy7eXAAAAJdklEQVR42mNkYGAURRBgIDY1NbWprKys1NfXz9fW1gb+//+/u5ubm/v//39nZrGpkQbG9AdJ2kzIYAAAAASUVORK5CYII='); 
+}
+.partly-cloudy {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAADy7eXAAAAJdklEQVR42mNkYGAURRBgIDY1NbWprKys1NfXz9fW1gb+//+/u5ubm/v//39nZrGpkQbG9AdJ2kzIYAAAAASUVORK5CYII='); 
+}
+.cloudy {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAADy7eXAAAAJdklEQVR42mNkYGAURRBgIDY1NbWprKys1NfXz9fW1gb+//+/u5ubm/v//39nZrGpkQbG9AdJ2kzIYAAAAASUVORK5CYII='); 
+}
+.overcast {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAADy7eXAAAAJdklEQVR42mNkYGAURRBgIDY1NbWprKys1NfXz9fW1gb+//+/u5ubm/v//39nZrGpkQbG9AdJ2kzIYAAAAASUVORK5CYII='); 
+}
