@@ -6,7 +6,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ffffff;
+    background: linear-gradient(to bottom, #87CEEB, #f0f8ff);
     font-family: 'DM Sans', sans-serif;
 }
 
@@ -16,16 +16,6 @@ body, html {
     max-width: 800px;
     height: 450px;
     text-align: center;
-}
-
-.background-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-    z-index: -1;
 }
 
 .widgets {
@@ -51,14 +41,6 @@ body, html {
     align-items: center;
 }
 
-.weather-icon {
-    width: 80px;
-    height: 80px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin-bottom: 10px;
-}
-
 .temperature {
     font-size: 2.5rem;
     font-weight: bold;
@@ -70,21 +52,4 @@ body, html {
 
 .time, .date {
     font-size: 1.5rem;
-}
-
-/* Weather Icons */
-.sunny {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAADy7eXAAAAJdklEQVR42mNkYGAURRBgIDY1NbWprKys1NfXz9fW1gb+//+/u5ubm/v//39nZrGpkQbG9AdJ2kzIYAAAAASUVORK5CYII='); 
-}
-.clear {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAADy7eXAAAAJdklEQVR42mNkYGAURRBgIDY1NbWprKys1NfXz9fW1gb+//+/u5ubm/v//39nZrGpkQbG9AdJ2kzIYAAAAASUVORK5CYII='); 
-}
-.partly-cloudy {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAADy7eXAAAAJdklEQVR42mNkYGAURRBgIDY1NbWprKys1NfXz9fW1gb+//+/u5ubm/v//39nZrGpkQbG9AdJ2kzIYAAAAASUVORK5CYII='); 
-}
-.cloudy {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAADy7eXAAAAJdklEQVR42mNkYGAURRBgIDY1NbWprKys1NfXz9fW1gb+//+/u5ubm/v//39nZrGpkQbG9AdJ2kzIYAAAAASUVORK5CYII='); 
-}
-.overcast {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAA2CAIAAADy7eXAAAAJdklEQVR42mNkYGAURRBgIDY1NbWprKys1NfXz9fW1gb+//+/u5ubm/v//39nZrGpkQbG9AdJ2kzIYAAAAASUVORK5CYII='); 
 }
