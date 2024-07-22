@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const hours = now.getHours();
         const minutes = now.getMinutes();
         const ampm = hours >= 12 ? 'PM' : 'AM';
-        const formattedTime = `${hours % 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
+        const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${ampm}`;
         const formattedDate = now.toLocaleDateString(undefined, {
             weekday: 'long',
             year: 'numeric',
