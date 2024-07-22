@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeElement = document.getElementById('time');
     const dateElement = document.getElementById('date');
 
-    const updateWeather = () => {
-        fetch(`https://api.weatherapi.com/v1/current.json?key=9d0b2624acea434ea1b204016242207&q=New York`)
+    const updateWeather = (latitude, longitude) => {
+        fetch(`https://api.weatherapi.com/v1/current.json?key=9d0b2624acea434ea1b204016242207&q=${latitude},${longitude}`)
             .then(response => response.json())
             .then(data => {
                 const temp = Math.round(data.current.temp_f);
@@ -34,8 +34,25 @@ document.addEventListener('DOMContentLoaded', () => {
         dateElement.textContent = formattedDate;
     };
 
-    updateWeather();
+    const getLocationAndUpdateWeather = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const { latitude, longitude } = position.coords;
+                updateWeather(latitude, longitude);
+            }, error => {
+                console.error('Error getting location:', error);
+                // Fallback to a default location if user denies geolocation
+                updateWeather(40.7128, -74.0060); // Coordinates for New York City
+            });
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+            // Fallback to a default location if geolocation is not supported
+            updateWeather(40.7128, -74.0060); // Coordinates for New York City
+        }
+    };
+
+    getLocationAndUpdateWeather();
     updateTime();
-    setInterval(updateWeather, 3600000); // Update weather every hour (3600000 milliseconds)
+    setInterval(getLocationAndUpdateWeather, 3600000); // Update weather every hour (3600000 milliseconds)
     setInterval(updateTime, 1000); // Update time every second
 });
