@@ -49,6 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateWeather();
     updateTime();
-    setInterval(updateWeather, 60000); // Update weather every 60 seconds
+    setInterval(updateWeather, 3600000); // Update weather every hour (3600000 milliseconds)
     setInterval(updateTime, 1000); // Update time every second
 });
