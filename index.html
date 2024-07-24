@@ -3,28 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Widgettoolr</title>
+    <title>Real-Time Weather</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <button id="fullscreen-btn" class="fullscreen-btn">Full Screen</button>
-        <button id="edit-btn" class="edit-btn">Edit</button>
+        <div class="toolbar" id="toolbar">
+            <button id="edit-btn" class="toolbar-btn">
+                <img src="edit-icon.png" alt="Edit">
+            </button>
+            <button id="fullscreen-btn" class="toolbar-btn">
+                <img src="fullscreen-icon.png" alt="Full Screen">
+            </button>
+        </div>
         <div class="color-picker" id="color-picker" style="display: none;">
             <input type="color" id="start-color" name="start-color" value="#87CEEB">
             <input type="color" id="end-color" name="end-color" value="#f0f8ff">
             <button id="apply-color">Apply</button>
         </div>
         <div class="widgets">
-            <div class="weather-widget draggable">
+            <div class="weather-widget draggable" draggable="true">
                 <div class="weather-info">
                     <div id="location" class="location">Loading location...</div>
                     <div class="condition" id="condition">Loading condition...</div>
                     <div class="temperature" id="temperature">--°F</div>
                 </div>
             </div>
-            <div class="time-widget draggable">
+            <div class="time-widget draggable" draggable="true">
                 <div class="time" id="time">--:-- AM</div>
                 <div class="date" id="date">-- --, ----</div>
             </div>
