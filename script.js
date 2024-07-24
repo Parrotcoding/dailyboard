@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const endColorInput = document.getElementById('end-color');
     const toolbar = document.getElementById('toolbar');
     let isEditing = false;
+    let currentDraggable = null;
 
     // Fullscreen functionality
     fullscreenBtn.addEventListener('click', () => {
@@ -48,18 +49,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Draggable functionality
     const draggables = document.querySelectorAll('.draggable');
     draggables.forEach(draggable => {
-        draggable.style.position = 'absolute';
-        let shiftX, shiftY;
-
         draggable.addEventListener('mousedown', (e) => {
             if (!isEditing) return;
 
-            shiftX = e.clientX - draggable.getBoundingClientRect().left;
-            shiftY = e.clientY - draggable.getBoundingClientRect().top;
+            currentDraggable = draggable;
+            const shiftX = e.clientX - draggable.getBoundingClientRect().left;
+            const shiftY = e.clientY - draggable.getBoundingClientRect().top;
 
             const moveAt = (pageX, pageY) => {
-                draggable.style.left = `${pageX - shiftX}px`;
-                draggable.style.top = `${pageY - shiftY}px`;
+                currentDraggable.style.left = `${pageX - shiftX}px`;
+                currentDraggable.style.top = `${pageY - shiftY}px`;
             };
 
             const onMouseMove = (e) => {
@@ -68,13 +67,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.addEventListener('mousemove', onMouseMove);
 
-            draggable.addEventListener('mouseup', () => {
+            draggable.onmouseup = () => {
                 document.removeEventListener('mousemove', onMouseMove);
                 draggable.onmouseup = null;
-            }, { once: true });
+                currentDraggable = null;
+            };
         });
 
         draggable.ondragstart = () => false;
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (currentDraggable) {
+            currentDraggable.onmouseup();
+        }
     });
 
     const updateWeather = (latitude, longitude) => {
