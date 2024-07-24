@@ -4,6 +4,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const locationElement = document.getElementById('location');
     const timeElement = document.getElementById('time');
     const dateElement = document.getElementById('date');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const editBtn = document.getElementById('edit-btn');
+    const colorPicker = document.getElementById('color-picker');
+    const applyColorBtn = document.getElementById('apply-color');
+    const startColorInput = document.getElementById('start-color');
+    const endColorInput = document.getElementById('end-color');
+
+    // Fullscreen functionality
+    fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    });
+
+    // Toggle edit mode
+    editBtn.addEventListener('click', () => {
+        const isEditing = colorPicker.style.display === 'block';
+        colorPicker.style.display = isEditing ? 'none' : 'block';
+    });
+
+    // Apply new background gradient colors
+    applyColorBtn.addEventListener('click', () => {
+        const startColor = startColorInput.value;
+        const endColor = endColorInput.value;
+        document.documentElement.style.setProperty('--start-color', startColor);
+        document.documentElement.style.setProperty('--end-color', endColor);
+    });
+
+    // Draggable functionality
+    const draggables = document.querySelectorAll('.draggable');
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', e.target.id);
+        });
+    });
+
+    document.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+
+    document.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const id = e.dataTransfer.getData('text');
+        const draggable = document.getElementById(id);
+        const rect = document.body.getBoundingClientRect();
+        draggable.style.position = 'absolute';
+        draggable.style.left = `${e.clientX - rect.left - draggable.offsetWidth / 2}px`;
+        draggable.style.top = `${e.clientY - rect.top - draggable.offsetHeight / 2}px`;
+    });
 
     const updateWeather = (latitude, longitude) => {
         console.log(`Fetching weather for coordinates: ${latitude}, ${longitude}`);
