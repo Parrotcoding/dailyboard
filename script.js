@@ -51,8 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Draggable functionality
     const draggables = document.querySelectorAll('.draggable');
     draggables.forEach(draggable => {
-        draggable.style.position = 'absolute';
-
         draggable.addEventListener('mousedown', (e) => {
             if (!isEditing) return;
 
