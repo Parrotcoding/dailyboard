@@ -51,9 +51,7 @@ body, html {
 }
 
 .widgets {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    position: relative;
     width: 100%;
     height: 100%;
     padding: 20px;
@@ -66,7 +64,19 @@ body, html {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: move;
-    position: relative;
+    position: absolute;
+}
+
+.weather-widget {
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.time-widget {
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .weather-info {
