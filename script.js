@@ -16,9 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
     fullscreenBtn.addEventListener('click', () => {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen();
-            toolbar.style.display = 'none';
         } else if (document.exitFullscreen) {
             document.exitFullscreen();
+        }
+    });
+
+    // Listen for fullscreen change to toggle toolbar visibility
+    document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+            toolbar.style.display = 'none';
+        } else {
             toolbar.style.display = 'flex';
         }
     });
@@ -40,23 +47,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Draggable functionality
     const draggables = document.querySelectorAll('.draggable');
     draggables.forEach(draggable => {
-        draggable.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text/plain', e.target.id);
-        });
-    });
-
-    document.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-
-    document.addEventListener('drop', (e) => {
-        e.preventDefault();
-        const id = e.dataTransfer.getData('text');
-        const draggable = document.getElementById(id);
-        const rect = document.body.getBoundingClientRect();
         draggable.style.position = 'absolute';
-        draggable.style.left = `${e.clientX - rect.left - draggable.offsetWidth / 2}px`;
-        draggable.style.top = `${e.clientY - rect.top - draggable.offsetHeight / 2}px`;
+        draggable.addEventListener('mousedown', (e) => {
+            const shiftX = e.clientX - draggable.getBoundingClientRect().left;
+            const shiftY = e.clientY - draggable.getBoundingClientRect().top;
+
+            const moveAt = (pageX, pageY) => {
+                draggable.style.left = `${pageX - shiftX}px`;
+                draggable.style.top = `${pageY - shiftY}px`;
+            };
+
+            const onMouseMove = (e) => {
+                moveAt(e.pageX, e.pageY);
+            };
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            draggable.onmouseup = () => {
+                document.removeEventListener('mousemove', onMouseMove);
+                draggable.onmouseup = null;
+            };
+        });
+
+        draggable.ondragstart = () => {
+            return false;
+        };
     });
 
     const updateWeather = (latitude, longitude) => {
