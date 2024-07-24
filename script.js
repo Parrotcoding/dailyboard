@@ -12,9 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const endColorInput = document.getElementById('end-color');
     const toolbar = document.getElementById('toolbar');
     let isEditing = false;
-    let currentDraggable = null;
-    let shiftX = 0;
-    let shiftY = 0;
 
     // Fullscreen functionality
     fullscreenBtn.addEventListener('click', () => {
@@ -46,45 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const endColor = endColorInput.value;
         document.documentElement.style.setProperty('--start-color', startColor);
         document.documentElement.style.setProperty('--end-color', endColor);
-    });
-
-    // Draggable functionality
-    const draggables = document.querySelectorAll('.draggable');
-    draggables.forEach(draggable => {
-        draggable.addEventListener('mousedown', (e) => {
-            if (!isEditing) return;
-
-            currentDraggable = draggable;
-            shiftX = e.clientX - draggable.getBoundingClientRect().left;
-            shiftY = e.clientY - draggable.getBoundingClientRect().top;
-
-            const moveAt = (pageX, pageY) => {
-                currentDraggable.style.left = `${pageX - shiftX}px`;
-                currentDraggable.style.top = `${pageY - shiftY}px`;
-            };
-
-            moveAt(e.pageX, e.pageY); // Correct initial position
-
-            const onMouseMove = (e) => {
-                moveAt(e.pageX, e.pageY);
-            };
-
-            document.addEventListener('mousemove', onMouseMove);
-
-            draggable.onmouseup = () => {
-                document.removeEventListener('mousemove', onMouseMove);
-                draggable.onmouseup = null;
-                currentDraggable = null;
-            };
-        });
-
-        draggable.ondragstart = () => false;
-    });
-
-    document.addEventListener('mouseup', () => {
-        if (currentDraggable) {
-            currentDraggable.onmouseup();
-        }
     });
 
     const updateWeather = (latitude, longitude) => {
