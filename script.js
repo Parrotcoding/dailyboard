@@ -49,11 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const draggables = document.querySelectorAll('.draggable');
     draggables.forEach(draggable => {
         draggable.style.position = 'absolute';
+        let shiftX, shiftY;
+
         draggable.addEventListener('mousedown', (e) => {
             if (!isEditing) return;
 
-            const shiftX = e.clientX - draggable.getBoundingClientRect().left;
-            const shiftY = e.clientY - draggable.getBoundingClientRect().top;
+            shiftX = e.clientX - draggable.getBoundingClientRect().left;
+            shiftY = e.clientY - draggable.getBoundingClientRect().top;
 
             const moveAt = (pageX, pageY) => {
                 draggable.style.left = `${pageX - shiftX}px`;
@@ -66,15 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.addEventListener('mousemove', onMouseMove);
 
-            draggable.onmouseup = () => {
+            draggable.addEventListener('mouseup', () => {
                 document.removeEventListener('mousemove', onMouseMove);
                 draggable.onmouseup = null;
-            };
+            }, { once: true });
         });
 
-        draggable.ondragstart = () => {
-            return false;
-        };
+        draggable.ondragstart = () => false;
     });
 
     const updateWeather = (latitude, longitude) => {
