@@ -10,13 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const applyColorBtn = document.getElementById('apply-color');
     const startColorInput = document.getElementById('start-color');
     const endColorInput = document.getElementById('end-color');
+    const toolbar = document.getElementById('toolbar');
 
     // Fullscreen functionality
     fullscreenBtn.addEventListener('click', () => {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen();
+            toolbar.style.display = 'none';
         } else if (document.exitFullscreen) {
             document.exitFullscreen();
+            toolbar.style.display = 'flex';
         }
     });
 
