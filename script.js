@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const startColorInput = document.getElementById('start-color');
     const endColorInput = document.getElementById('end-color');
     const toolbar = document.getElementById('toolbar');
+    let isEditing = false;
 
     // Fullscreen functionality
     fullscreenBtn.addEventListener('click', () => {
@@ -32,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Toggle edit mode
     editBtn.addEventListener('click', () => {
-        const isEditing = colorPicker.style.display === 'block';
-        colorPicker.style.display = isEditing ? 'none' : 'block';
+        isEditing = !isEditing;
+        colorPicker.style.display = isEditing ? 'block' : 'none';
     });
 
     // Apply new background gradient colors
@@ -49,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
     draggables.forEach(draggable => {
         draggable.style.position = 'absolute';
         draggable.addEventListener('mousedown', (e) => {
+            if (!isEditing) return;
+
             const shiftX = e.clientX - draggable.getBoundingClientRect().left;
             const shiftY = e.clientY - draggable.getBoundingClientRect().top;
 
