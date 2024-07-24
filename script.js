@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const toolbar = document.getElementById('toolbar');
     let isEditing = false;
     let currentDraggable = null;
+    let shiftX = 0;
+    let shiftY = 0;
 
     // Fullscreen functionality
     fullscreenBtn.addEventListener('click', () => {
@@ -49,17 +51,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Draggable functionality
     const draggables = document.querySelectorAll('.draggable');
     draggables.forEach(draggable => {
+        draggable.style.position = 'absolute';
+
         draggable.addEventListener('mousedown', (e) => {
             if (!isEditing) return;
 
             currentDraggable = draggable;
-            const shiftX = e.clientX - draggable.getBoundingClientRect().left;
-            const shiftY = e.clientY - draggable.getBoundingClientRect().top;
+            shiftX = e.clientX - draggable.getBoundingClientRect().left;
+            shiftY = e.clientY - draggable.getBoundingClientRect().top;
 
             const moveAt = (pageX, pageY) => {
                 currentDraggable.style.left = `${pageX - shiftX}px`;
                 currentDraggable.style.top = `${pageY - shiftY}px`;
             };
+
+            moveAt(e.pageX, e.pageY); // Correct initial position
 
             const onMouseMove = (e) => {
                 moveAt(e.pageX, e.pageY);
